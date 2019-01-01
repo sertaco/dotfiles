@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/granularity/.config/zsh/.oh-my-zsh
+export ZSH="/Users/granularity/.oh-my-zsh"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=vim
@@ -10,7 +10,6 @@ export LANG="en_US"
 
 alias rvm-prompt=$HOME/.rvm/bin/rvm-prompt
 
-source $ZSH/oh-my-zsh.sh
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
@@ -65,6 +64,8 @@ ENABLE_CORRECTION="true"
 # much, much faster.
 plugins=(git)
 
+source $ZSH/oh-my-zsh.sh
+
 
 # Source the dotfiles (order matters)
 #for DOTFILE in "$DOTFILES_DIR"/system/.{prompt,function,env,alias}; do
@@ -106,3 +107,4 @@ PS1='$(show_virtual_env)'$PS1
 
 eval "$(direnv hook zsh)"
 
+source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme

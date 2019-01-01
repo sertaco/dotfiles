@@ -3,18 +3,17 @@ OS := $(shell bin/is-supported bin/is-macos macos linux)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 export XDG_CONFIG_HOME := $(HOME)/.config
 export STOW_DIR := $(DOTFILES_DIR)
-
 all: $(OS)
 
-macos: sudo link  #sudo core-macos packages link
+macos: sudo core-macos packages link
 
-core-macos: brew bash zsh git
+core-macos: brew zsh git
 
 sudo:
 	sudo -v
 	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-packages: brew-packages cask-apps
+packages: brew-packages
 
 link: stow-$(OS)
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE{,.bak}; fi; done
@@ -28,12 +27,11 @@ stow-macos: brew
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
 
-bash: BASH=/usr/local/bin/bash
-
-bash: SHELLS=/private/etc/shells
-bash: brew
-	if ! grep -q $(BASH) $(SHELLS); then brew install bash bash-completion@2 pcre && sudo append $(BASH) $(SHELLS) && chsh -s $(BASH); fi
-
+zsh: ZSH=$(HOME)/.oh-my-zsh
+zsh: brew
+	brew install zsh zsh-completions
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
+	git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 git: brew
 	brew install git git-extras
 

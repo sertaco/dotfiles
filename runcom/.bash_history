@@ -33,3 +33,27 @@ homebrew
 brew
 brew install zsh zsh-completions
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+ls
+cd ..
+ls -la
+vi .zshrc.pre-oh-my-zsh 
+vi .zshrc
+`````N
+
+
+echo "source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
+LS
+..
+cd ..
+ls
+env
+echo $Z
+cat /etc/shells
+chsh /usr/local/bin/zsh
+chsh
+cd ..
+ci .vimrc
+vi .vimrc
+cd .dotfiles/
+vi Makefile 
+make
