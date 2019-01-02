@@ -9,8 +9,6 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
 
 alias rvm-prompt=$HOME/.rvm/bin/rvm-prompt
-
-
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -96,15 +94,10 @@ test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
-show_virtual_env() {
-  if [ -n "$VIRTUAL_ENV" ]; then
-    echo "($(basename $VIRTUAL_ENV))"
-  fi
+function show_virt_env() {
+    if [ -n "$VIRTUAL_ENV" ]; then
+	echo "($(basename $VIRTUAL_ENV))"
+    fi
 }
-export -f show_virtual_env
-PS1='$(show_virtual_env)'$PS1
-
 
 eval "$(direnv hook zsh)"
-
-source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
