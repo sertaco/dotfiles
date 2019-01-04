@@ -12,7 +12,7 @@ core-macos: brew zsh git
 
 core-centos:
     yum check-update
-    yum update
+    sudo yum update
 
 stow-centos: core-centos
 	is-executable stow || yum -y install stow
