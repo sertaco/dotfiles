@@ -1,13 +1,21 @@
 DOTFILES_DIR :=$(HOME)/.dotfiles
-OS := $(shell bin/is-supported bin/is-macos macos linux)
+OS := $(shell bin/is-supported bin/is-macos macos centos)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 export XDG_CONFIG_HOME := $(HOME)/.config
 export STOW_DIR := $(DOTFILES_DIR)
 all: $(OS)
 
 macos: sudo core-macos packages link
+centos: core-centos link
 
 core-macos: brew zsh git
+
+core-centos:
+    yum check-update
+    yum update
+
+stow-centos: core-centos
+	is-executable stow || yum -y install stow
 
 sudo:
 	sudo -v

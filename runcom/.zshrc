@@ -63,7 +63,7 @@ ENABLE_CORRECTION="true"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-
+source mdp-env
 
 # Source the dotfiles (order matters)
 #for DOTFILE in "$DOTFILES_DIR"/system/.{prompt,function,env,alias}; do
