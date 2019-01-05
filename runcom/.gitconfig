@@ -39,3 +39,4 @@
 [core]
 	autocrlf = input
 	safecrlf = false
+	excludesfile = /Users/granularity/.gitignore_global
