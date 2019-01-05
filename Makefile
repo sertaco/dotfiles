@@ -13,9 +13,10 @@ core-macos: brew zsh git
 core-centos:
 #	yum check-update
 #	yum update
-	sudo yum -y install zsh
-	sudo usermod -s /bin/zsh user	
-#chsh -s /bin/zsh user
+	sudo yum -y install zsh wget git
+	sudo usermod -s /bin/zsh user
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
+	git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 
 stow-centos:
 	is-executable stow || sudo yum -y install stow
@@ -33,7 +34,6 @@ link: stow-$(OS)
 	stow -t $(HOME) rc-$(OS)
 	stow -t $(XDG_CONFIG_HOME) config
 
-
 stow-macos: brew
 	is-executable stow || brew install stow
 
@@ -45,6 +45,7 @@ zsh: brew
 	brew install zsh zsh-completions
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
 	git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
+
 git: brew
 	brew install git git-extras
 
