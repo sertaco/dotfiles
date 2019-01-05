@@ -28,9 +28,9 @@ function mdp-ssh(){
         WS='workspace'
     fi
 
-    if [ $1=='dev' ]; then
+    if [ $1 = 'dev' ]; then
         ssh -i $MDP_KEY -t $MDP_REMOTE_DEV 'cd '${WS}'; bash'
-        else
+    else
         ssh -i $MDP_KEY -t $1 'cd ${WS}; bash'
     fi
 }
