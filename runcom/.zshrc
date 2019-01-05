@@ -1,5 +1,6 @@
+#!/bin/zsh
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/granularity/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=vim
@@ -14,14 +15,6 @@ alias rvm-prompt=$HOME/.rvm/bin/rvm-prompt
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-#ZSH_THEME="intheloop"
-#ZSH_THEME="pmcgee-sertac"
-#ZSH_THEME="ys-modified"
-#ZSH_THEME="agnoster"
-#ZSH_THEME="spaceship-prompt"
-#ZSH_THEME="smt"
-#ZSH_THEME="random"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv ssh aws  status root_indicator background_jobs history public_ip time)
@@ -63,7 +56,7 @@ ENABLE_CORRECTION="true"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-source mdp-env
+source $HOME/.config/mdp/mdprc
 
 # Source the dotfiles (order matters)
 #for DOTFILE in "$DOTFILES_DIR"/system/.{prompt,function,env,alias}; do
