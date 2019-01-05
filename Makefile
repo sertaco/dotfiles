@@ -6,16 +6,19 @@ export STOW_DIR := $(DOTFILES_DIR)
 all: $(OS)
 
 macos: sudo core-macos packages link
-centos: core-centos link
+centos: sudo core-centos link
 
 core-macos: brew zsh git
 
 core-centos:
-    yum check-update
-    sudo yum update
+#	yum check-update
+#	yum update
+	sudo yum -y install zsh
+	sudo usermod -s /bin/zsh user	
+#chsh -s /bin/zsh user
 
-stow-centos: core-centos
-	is-executable stow || yum -y install stow
+stow-centos:
+	is-executable stow || sudo yum -y install stow
 
 sudo:
 	sudo -v
