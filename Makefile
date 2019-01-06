@@ -35,7 +35,7 @@ core-centos:
 	sudo rm $(GO_PACKAGE)
 	git clone https://github.com/direnv/direnv.git || echo "direnv already exists!"
 	cd direnv; sudo make; sudo make install
-
+	rm -rf direnv
 stow-centos:
 	is-executable stow || sudo yum -y install stow
 
