@@ -72,18 +72,22 @@ source $HOME/.config/mdp/mdprc
 
 
 #MAC bindings
-bindkey "[D" backward-word
-bindkey "[C" forward-word
-bindkey "^[a" beginning-of-line
-bindkey "^[e" end-of-line
+#bindkey "[D" backward-word
+#bindkey "[C" forward-word
+#bindkey "^[a" beginning-of-line
+#bindkey "^[e" end-of-line
 
 
 #Go
-export GOPATH="${HOME}/.go"
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-test -d "${GOPATH}" || mkdir "${GOPATH}"
-test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+export PATH=$PATH:/usr/local/go/bin
+
+
+#
+#export GOPATH="${HOME}/.go"
+#export GOROOT="$(brew --prefix golang)/libexec"
+#export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+#test -d "${GOPATH}" || mkdir "${GOPATH}"
+#test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
 
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
@@ -94,4 +98,4 @@ function show_virt_env() {
     fi
 }
 
-eval "$(direnv hook zsh)"
+#eval "$(direnv hook zsh)"

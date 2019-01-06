@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 # MDP folders on the machine
 WORKSPACE=${HOME}'/workspace'
 MDP_LAMBDA=${WORKSPACE}'/mdp_els/lambda'
@@ -29,9 +29,9 @@ function mdp-ssh(){
     fi
 
     if [ $1 = 'dev' ]; then
-        ssh -i $MDP_KEY -t $MDP_REMOTE_DEV 'cd '${WS}'; bash'
+        ssh -i $MDP_KEY -t $MDP_REMOTE_DEV 'cd '${WS}'; zsh'
     else
-        ssh -i $MDP_KEY -t $1 'cd ${WS}; bash'
+        ssh -i $MDP_KEY -t $1 'cd ${WS}; zsh'
     fi
 }
 
