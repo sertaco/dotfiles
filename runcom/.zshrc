@@ -79,13 +79,10 @@ source $HOME/.config/mdp/mdprc
 
 
 #Go
-<<<<<<< HEAD
-=======
+
 export PATH=$PATH:/usr/local/go/bin
 
-
 #
->>>>>>> 3d57abd66c0a27bcd2913c06cc7e242fb32ec787
 #export GOPATH="${HOME}/.go"
 #export GOROOT="$(brew --prefix golang)/libexec"
 #export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
