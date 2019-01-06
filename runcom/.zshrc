@@ -98,4 +98,4 @@ export PATH=$PATH:/usr/local/go/bin
 #    fi
 #}
 
-#eval "$(direnv hook zsh)"
+eval "$(direnv hook zsh)"

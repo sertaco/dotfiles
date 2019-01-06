@@ -33,6 +33,8 @@ core-centos:
 	wget https://dl.google.com/go/$(GO_PACKAGE)
 	sudo tar -C /usr/local -xzf $(GO_PACKAGE)
 	sudo rm $(GO_PACKAGE)
+	git clone https://github.com/direnv/direnv.git || echo "direnv already exists!"
+	cd direnv; sudo make; sudo make install
 
 stow-centos:
 	is-executable stow || sudo yum -y install stow
