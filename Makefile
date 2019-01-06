@@ -31,8 +31,8 @@ core-centos:
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 	chsh -s $(ZSH_BIN)
 	wget https://dl.google.com/go/$(GO_PACKAGE)
-	tar -C /usr/local -xzf $(GO_PACKAGE)
-	rm $(GO_PACKAGE)
+	sudo tar -C /usr/local -xzf $(GO_PACKAGE)
+	sudo rm $(GO_PACKAGE)
 
 stow-centos:
 	is-executable stow || sudo yum -y install stow
