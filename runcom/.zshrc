@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -72,26 +72,26 @@ source $HOME/.config/mdp/mdprc
 
 
 #MAC bindings
-bindkey "[D" backward-word
-bindkey "[C" forward-word
-bindkey "^[a" beginning-of-line
-bindkey "^[e" end-of-line
+#bindkey "[D" backward-word
+#bindkey "[C" forward-word
+#bindkey "^[a" beginning-of-line
+#bindkey "^[e" end-of-line
 
 
 #Go
-export GOPATH="${HOME}/.go"
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-test -d "${GOPATH}" || mkdir "${GOPATH}"
-test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+#export GOPATH="${HOME}/.go"
+#export GOROOT="$(brew --prefix golang)/libexec"
+#export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+#test -d "${GOPATH}" || mkdir "${GOPATH}"
+#test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
 
-[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+#[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
-function show_virt_env() {
-    if [ -n "$VIRTUAL_ENV" ]; then
-	echo "($(basename $VIRTUAL_ENV))"
-    fi
-}
+#function show_virt_env() {
+#    if [ -n "$VIRTUAL_ENV" ]; then
+#	echo "($(basename $VIRTUAL_ENV))"
+#    fi
+#}
 
-eval "$(direnv hook zsh)"
+#eval "$(direnv hook zsh)"
