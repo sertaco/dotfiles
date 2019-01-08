@@ -70,7 +70,7 @@ source $HOME/.config/mdp/mdprc
 #fi
 
 
-MAC bindings
+#MAC bindings
 bindkey "[D" backward-word
 bindkey "[C" forward-word
 bindkey "^[a" beginning-of-line
