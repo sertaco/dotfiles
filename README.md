@@ -11,7 +11,7 @@ This .dotfiles is intended for both macos and centos as these two are currently 
 - Zsh
 - Oh-My-Zsh
 - Powerlevel9k OMZ theme
-- Stow
+- stow
 - git
 - vim
 - Go
@@ -27,6 +27,11 @@ Use the [Makefile](./Makefile) to install everything [listed above](#package-ove
     make
 
 ## Post-install
+Finish direnv installation with the following commands:
+
+    cd direnv; sudo make; sudo make install; cd ..
+    rm -rf direnv
+
 For leveraging direnv with virtualenv of Python, add a .envrc file with following content to the parent directory
 of each of the Python workspaces:
 

@@ -70,11 +70,11 @@ source $HOME/.config/mdp/mdprc
 #fi
 
 
-#MAC bindings
-#bindkey "[D" backward-word
-#bindkey "[C" forward-word
-#bindkey "^[a" beginning-of-line
-#bindkey "^[e" end-of-line
+MAC bindings
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
 
 
 #Go
@@ -89,7 +89,7 @@ export PATH=$PATH:/usr/local/go/bin
 #test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
 
-#[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
 #function show_virt_env() {
 #    if [ -n "$VIRTUAL_ENV" ]; then
