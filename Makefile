@@ -33,7 +33,7 @@ core-centos:
 	sudo yum -y install zsh wget git
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
-	ZSH_BIN = '/usr/zsh'
+	ZSH_BIN='/usr/zsh'
 	chsh -s $(ZSH_BIN)
 	wget https://dl.google.com/go/$(GO_PACKAGE)
 	sudo tar -C /usr/local -xzf $(GO_PACKAGE)
