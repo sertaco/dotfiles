@@ -21,6 +21,22 @@ MDP_REMOTE_DEV='user@ec2-34-247-39-87.eu-west-1.compute.amazonaws.com'
 MDP_KEY='~/.ssh/oxyma_ec2_rsa'
 
 # MDP Functions
+# $1:env
+function mdp-restart-api(){
+if [ $1 = 'build' ];
+	then dns_name="$BUILD_EC2"
+	elif [ $1 = 'sit' ]
+        	then dns_name="$SIT_EC2"
+	else
+        	echo "unknown environment name"
+fi
+
+api_endpoint=ec2-user@"$dns_name"
+
+ssh -i "$MDP_KEY"  "$api_endpoint" sudo ./deploy-web-app.sh
+}
+
+# $1:env $2:directory 
 function mdp-ssh(){
     if [ $# -ge 2 ]; then
         WS='workspace/'$2
@@ -35,7 +51,7 @@ function mdp-ssh(){
     fi
 }
 
-# $1: branch
+# $1:branch
 function mdp-checkout(){
     echo "==============================================================="
     echo "======== Checking out mdp-lambda with branch/tag: "$1
@@ -72,7 +88,7 @@ function mdp-checkout(){
     echo "Check out finished!"
 }
 
-# $1: to_branch $2: from_branch
+# $1:to_branch $2:from_branch
 function mdp-merge(){
     echo "==============================================================="
     echo "======== Checking out mdp-lambda with branch/tag: "$1
@@ -138,7 +154,4 @@ function mdp-push(){
     echo
     echo "Check out finished!"
 }
-
-#mdp-api-restart.sh ip-10-68-39-113.eu-west-1.compute.internal
-
 
