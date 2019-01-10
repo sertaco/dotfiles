@@ -17,11 +17,12 @@ MDP_REMOTE_DEV='user@ec2-34-247-39-87.eu-west-1.compute.amazonaws.com'
 MDP_KEY='~/.ssh/oxyma_ec2_rsa'
 
 # MDP Functions
-#$1:env $2:version
-function mdp-api-deploy(){
-cd "$MDP"/api
-git checkout $2
-harc aws:ec2:deploy -e $1 -u GIT_USERNAME -p GIT_PASSWORD -v $2
+function mdp-deploy(){
+mdp-emr-deploy $1 $2
+mdp-lambda-deploy $1 $2
+mdp-db-deploy $1 $2
+mdp-api-deploy $1 $2
+mdp-restart-api $1
 }
 
 #$1:env $2:version
@@ -50,6 +51,13 @@ fi
 cd "$MDP"/db
 git checkout $2
 mynoora recreate -h "$mdp_db" -e $1
+}
+
+#$1:env $2:version
+function mdp-api-deploy(){
+cd "$MDP"/api
+git checkout $2
+harc aws:ec2:deploy -e $1 -u GIT_USERNAME -p GIT_PASSWORD -v $2
 }
 
 # $1:env
