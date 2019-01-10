@@ -1,16 +1,7 @@
 #!/bin/zsh
 
-GIT_USERNAME='orucs'
-GIT_PASSWORD='Oxyma12345'
-
 # MDP folders on the machine
 WORKSPACE=${HOME}'/workspace'
-#MDP_LAMBDA=${WORKSPACE}'/mdp_els/lambda'
-#MDP_INFRA=${WORKSPACE}'/mdp_els/infra'
-#MDP_DB=${WORKSPACE}'/mdp_els/db'
-#MDP_EMR=${WORKSPACE}'/mdp_els/emr'
-#MDP_API=${WORKSPACE}'/mdp_els/api'
-#MDP_TOOLBOX=${WORKSPACE}'/mdp_els/toolbox'
 MDP=${WORKSPACE}'/mdp'
 
 # DB endpoints
@@ -27,31 +18,28 @@ MDP_KEY='~/.ssh/oxyma_ec2_rsa'
 
 # MDP Functions
 #$1:env $2:version
-function mdp-deploy-api(){
+function mdp-api-deploy(){
 cd "$MDP"/api
 git checkout $2
 harc aws:ec2:deploy -e $1 -u GIT_USERNAME -p GIT_PASSWORD -v $2
-cd "$OLDPWD"
 }
 
 #$1:env $2:version
-function mdp-deploy-emr(){
+function mdp-emr-deploy(){
 cd "$MDP"/emr
 git checkout $2
 harc aws:emr:deploy -e $1 -u orucs -p Oxyma12345 -v $2
-cd "$OLDPWD"
 }
 
 #$1:env $2:version
-function mdp-deploy-lambda(){
+function mdp-lambda-deploy(){
 cd "$MDP"/lambda
 git checkout $2
 harc aws:lambda:deploy -e $1 -u orucs -p Oxyma12345 -v $2
-cd "$OLDPWD"
 }
 
 #$1:env $2:version
-function mdp-deploy-db(){
+function mdp-db-deploy(){
 if [ $1 = 'build' ];
     then mdp_db="$MDP_BUILD_DB"
     elif [ $1 = 'sit' ]
@@ -59,11 +47,9 @@ if [ $1 = 'build' ];
     else
         echo "unknown environment name"
 fi
-
 cd "$MDP"/db
 git checkout $2
-mynoora recreate -h mdp_db -e $1
-cd "$OLDPWD"
+mynoora recreate -h "$mdp_db" -e $1
 }
 
 # $1:env
@@ -75,9 +61,7 @@ if [ $1 = 'build' ];
 	else
         	echo "unknown environment name"
 fi
-
 api_endpoint=ec2-user@"$dns_name"
-
 ssh -i "$MDP_KEY"  "$api_endpoint" sudo ./deploy-web-app.sh
 }
 
@@ -96,107 +80,107 @@ function mdp-ssh(){
     fi
 }
 
-# $1:branch
-function mdp-checkout(){
-    echo "==============================================================="
-    echo "======== Checking out mdp-lambda with branch/tag: "$1
-    cd ${MDP_LAMBDA}
-    git fetch
-    git checkout -fB $1
-    echo "==============================================================="
-    echo "======== Checking out mdp-db with branch/tag: "$1
-    cd ${MDP_DB}
-    git fetch
-    git checkout -fB $1
-    echo "==============================================================="
-    echo "======== Checking out mdp-emr with branch/tag: "$1
-    cd ${MDP_EMR}
-    git fetch
-    git checkout -fB $1
-    echo "==============================================================="
-    echo "======== Checking out mdp-api with branch/tag: "$1
-    cd ${MDP_API}
-    git fetch
-    git checkout -fB $1
-    echo "==============================================================="
-    echo "======== Checking out mdp-toolbox with branch/tag: "$1
-    cd ${MDP_TOOLBOX}
-    git fetch
-    git checkout -fB $1
-    echo "mdp-toolbox checked out!"
-    echo "==============================================================="
-    echo "======== Checking out mdp-infra with branch/tag: "$1
-    cd ${MDP_INFRA}
-    git fetch
-    git checkout -fB $1
-    echo
-    echo "Check out finished!"
-}
-
-# $1:to_branch $2:from_branch
-function mdp-merge(){
-    echo "==============================================================="
-    echo "======== Checking out mdp-lambda with branch/tag: "$1
-    cd ${MDP_LAMBDA}
-    git checkout $1
-    git merge $2
-    echo "==============================================================="
-    echo "======== Checking out mdp-db with branch/tag: "$1
-    cd ${MDP_DB}
-    git checkout $1
-    git merge $2
-    echo "==============================================================="
-    echo "======== Checking out mdp-emr with branch/tag: "$1
-    cd ${MDP_EMR}
-    git checkout $1
-    git merge $2
-    echo "==============================================================="
-    echo "======== Checking out mdp-api with branch/tag: "$1
-    cd ${MDP_API}
-    git checkout $1
-    git merge $2
-    echo "==============================================================="
-    echo "======== Checking out mdp-toolbox with branch/tag: "$1
-    cd ${MDP_TOOLBOX}
-    git checkout $1
-    git merge $2
-    echo "mdp-toolbox checked out!"
-    echo "==============================================================="
-    echo "======== Checking out mdp-infra with branch/tag: "$1
-    cd ${MDP_INFRA}
-    git checkout $1
-    git merge $2
-    echo
-    echo "Check out finished!"
-}
-
-function mdp-push(){
-    echo "==============================================================="
-    echo "======== Checking out mdp-lambda with branch/tag: "$1
-    cd ${MDP_LAMBDA}
-    git push
-    echo "==============================================================="
-    echo "======== Checking out mdp-db with branch/tag: "$1
-    cd ${MDP_DB}
-    git push
-    echo "==============================================================="
-    echo "======== Checking out mdp-emr with branch/tag: "$1
-    cd ${MDP_EMR}
-    git push
-    echo "==============================================================="
-    echo "======== Checking out mdp-api with branch/tag: "$1
-    cd ${MDP_API}
-    git push
-    echo "==============================================================="
-    echo "======== Checking out mdp-toolbox with branch/tag: "$1
-    cd ${MDP_TOOLBOX}
-    git push
-    echo "mdp-toolbox checked out!"
-    echo "==============================================================="
-    echo "======== Checking out mdp-infra with branch/tag: "$1
-    cd ${MDP_INFRA}
-    git push
-    echo
-    echo "Check out finished!"
-}
-
+## $1:branch
+#function mdp-checkout(){
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-lambda with branch/tag: "$1
+#    cd ${MDP_LAMBDA}
+#    git fetch
+#    git checkout -fB $1
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-db with branch/tag: "$1
+#    cd ${MDP_DB}
+#    git fetch
+#    git checkout -fB $1
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-emr with branch/tag: "$1
+#    cd ${MDP_EMR}
+#    git fetch
+#    git checkout -fB $1
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-api with branch/tag: "$1
+#    cd ${MDP_API}
+#    git fetch
+#    git checkout -fB $1
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-toolbox with branch/tag: "$1
+#    cd ${MDP_TOOLBOX}
+#    git fetch
+#    git checkout -fB $1
+#    echo "mdp-toolbox checked out!"
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-infra with branch/tag: "$1
+#    cd ${MDP_INFRA}
+#    git fetch
+#    git checkout -fB $1
+#    echo
+#    echo "Check out finished!"
+#}
+#
+## $1:to_branch $2:from_branch
+#function mdp-merge(){
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-lambda with branch/tag: "$1
+#    cd ${MDP_LAMBDA}
+#    git checkout $1
+#    git merge $2
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-db with branch/tag: "$1
+#    cd ${MDP_DB}
+#    git checkout $1
+#    git merge $2
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-emr with branch/tag: "$1
+#    cd ${MDP_EMR}
+#    git checkout $1
+#    git merge $2
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-api with branch/tag: "$1
+#    cd ${MDP_API}
+#    git checkout $1
+#    git merge $2
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-toolbox with branch/tag: "$1
+#    cd ${MDP_TOOLBOX}
+#    git checkout $1
+#    git merge $2
+#    echo "mdp-toolbox checked out!"
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-infra with branch/tag: "$1
+#    cd ${MDP_INFRA}
+#    git checkout $1
+#    git merge $2
+#    echo
+#    echo "Check out finished!"
+#}
+#
+#function mdp-push(){
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-lambda with branch/tag: "$1
+#    cd ${MDP_LAMBDA}
+#    git push
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-db with branch/tag: "$1
+#    cd ${MDP_DB}
+#    git push
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-emr with branch/tag: "$1
+#    cd ${MDP_EMR}
+#    git push
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-api with branch/tag: "$1
+#    cd ${MDP_API}
+#    git push
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-toolbox with branch/tag: "$1
+#    cd ${MDP_TOOLBOX}
+#    git push
+#    echo "mdp-toolbox checked out!"
+#    echo "==============================================================="
+#    echo "======== Checking out mdp-infra with branch/tag: "$1
+#    cd ${MDP_INFRA}
+#    git push
+#    echo
+#    echo "Check out finished!"
+#}
+#
