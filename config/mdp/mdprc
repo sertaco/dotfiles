@@ -30,7 +30,7 @@ if [ $1 = 'build' ];
         then dns_name="$SIT_EC2"
     else
         echo "unknown environment name"
-        exit 1
+        return 1
 fi
 
 cd "$MDP"/api
