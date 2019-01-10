@@ -1,4 +1,8 @@
 #!/bin/zsh
+
+GIT_USERNAME='orucs'
+GIT_PASSWORD='Oxyma12345'
+
 # MDP folders on the machine
 WORKSPACE=${HOME}'/workspace'
 #MDP_LAMBDA=${WORKSPACE}'/mdp_els/lambda'
@@ -7,7 +11,7 @@ WORKSPACE=${HOME}'/workspace'
 #MDP_EMR=${WORKSPACE}'/mdp_els/emr'
 #MDP_API=${WORKSPACE}'/mdp_els/api'
 #MDP_TOOLBOX=${WORKSPACE}'/mdp_els/toolbox'
-MDP=${WORKSPACE}
+MDP=${WORKSPACE}'/mdp'
 
 # DB endpoints
 MDP_BUILD_DB='mdp-db-build-0.cuhwmvni5qkd.eu-west-1.rds.amazonaws.com'
@@ -24,20 +28,43 @@ MDP_KEY='~/.ssh/oxyma_ec2_rsa'
 # MDP Functions
 #$1:env $2:version
 function mdp-deploy-api(){
-if [ $1 = 'build' ];
-        then env="$BUILD_EC2"
-    elif [ $1 = 'sit' ]
-        then dns_name="$SIT_EC2"
-    else
-        echo "unknown environment name"
-        return 1
-fi
-
 cd "$MDP"/api
-harc aws:ec2:deploy -e $1 -u orucs -p Oxyma12345 -v $2
-
+git checkout $2
+harc aws:ec2:deploy -e $1 -u GIT_USERNAME -p GIT_PASSWORD -v $2
+cd "$OLDPWD"
 }
 
+#$1:env $2:version
+function mdp-deploy-emr(){
+cd "$MDP"/emr
+git checkout $2
+harc aws:emr:deploy -e $1 -u orucs -p Oxyma12345 -v $2
+cd "$OLDPWD"
+}
+
+#$1:env $2:version
+function mdp-deploy-lambda(){
+cd "$MDP"/lambda
+git checkout $2
+harc aws:lambda:deploy -e $1 -u orucs -p Oxyma12345 -v $2
+cd "$OLDPWD"
+}
+
+#$1:env $2:version
+function mdp-deploy-db(){
+if [ $1 = 'build' ];
+    then mdp_db="$MDP_BUILD_DB"
+    elif [ $1 = 'sit' ]
+        then mdp_db="$MDP_SIT_DB"
+    else
+        echo "unknown environment name"
+fi
+
+cd "$MDP"/db
+git checkout $2
+mynoora recreate -h mdp_db -e $1
+cd "$OLDPWD"
+}
 
 # $1:env
 function mdp-restart-api(){
