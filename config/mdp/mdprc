@@ -18,11 +18,11 @@ MDP_KEY='~/.ssh/oxyma_ec2_rsa'
 
 # MDP Functions
 function mdp-deploy(){
-mdp-emr-deploy $1 $2
-mdp-lambda-deploy $1 $2
-mdp-db-deploy $1 $2
-mdp-api-deploy $1 $2
-mdp-restart-api $1
+mdp-emr-deploy $1 $2 || return 1
+mdp-lambda-deploy $1 $2 || return 1
+mdp-db-deploy $1 $2 || return 1
+mdp-api-deploy $1 $2 || return 1
+mdp-restart-api $1 || return 1
 }
 
 #$1:env $2:version
