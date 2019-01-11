@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # MDP folders on the machine
 WORKSPACE=${HOME}'/workspace'
 MDP=${WORKSPACE}'/mdp'
