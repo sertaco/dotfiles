@@ -42,7 +42,7 @@ core-centos: zsh-centos
 	sudo rm $(GO_PACKAGE)
 
 zsh-centos:
-	zsh --version | grep 5.6.2 && { echo "Zsh is already installed!" >/dev/stderr exit 1 }
+	zsh --version | grep 5.6.2 && exit 1
 	sudo yum -y install wget git
 	sudo yum -y install ncurses-devel
 	wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz
