@@ -31,14 +31,8 @@ cleanup:
 	rm rc-macos rc-centos
 
 #centos
-core-centos:
-#	yum check-update
-#	yum update
+core-centos: zsh-centos
 	sudo yum -y install wget git
-	sudo yum -y install ncurses-devel
-	wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz
-	sudo tar -xJf zsh-5.6.2.tar.xz && cd zsh-5.6.2 && ./configure --prefix=/usr --bindir=/bin && make && sudo make install
-	rm -rf zsh-5.6.2 zsh-5.6.2.tar.xz
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 	echo $(ZSH_BIN) | sudo tee -a /etc/shells
@@ -46,6 +40,15 @@ core-centos:
 	wget https://dl.google.com/go/$(GO_PACKAGE)
 	sudo tar -C /usr/local -xzf $(GO_PACKAGE)
 	sudo rm $(GO_PACKAGE)
+
+zsh-centos:
+	zsh --version | grep 5.6.2 && {echo "Zsh is already installed!" >/dev/stderr exit 1}
+	sudo yum -y install wget git
+	sudo yum -y install ncurses-devel
+	wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz
+	sudo tar -xJf zsh-5.6.2.tar.xz && cd zsh-5.6.2 && ./configure --prefix=/usr --bindir=/bin && make && sudo make install
+	rm -rf zsh-5.6.2 zsh-5.6.2.tar.xz
+
 stow-centos:
 	is-executable stow || sudo yum -y install stow
 
