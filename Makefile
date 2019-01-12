@@ -3,9 +3,8 @@ OS := $(shell bin/is-supported bin/is-macos macos centos)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 ZSH := $(HOME)/.oh-my-zsh
 ZSH_BIN := /bin/zsh
-
+ZSH_V := $(zsh --version | grep 5.6.2)
 GO_PACKAGE := 'go1.11.4.linux-amd64.tar.gz'
-
 XDG_CONFIG_HOME := $(HOME)/.config
 STOW_DIR := $(DOTFILES_DIR)
 
@@ -42,12 +41,13 @@ core-centos: zsh-centos
 	sudo rm $(GO_PACKAGE)
 
 zsh-centos:
-	zsh --version | grep 5.6.2 && exit 1
-	sudo yum -y install wget git
-	sudo yum -y install ncurses-devel
-	wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz
-	sudo tar -xJf zsh-5.6.2.tar.xz && cd zsh-5.6.2 && ./configure --prefix=/usr --bindir=/bin && make && sudo make install
-	rm -rf zsh-5.6.2 zsh-5.6.2.tar.xz
+	ifeq ($(ZSH_V),)
+		sudo yum -y install wget git
+		sudo yum -y install ncurses-devel
+		wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz
+		sudo tar -xJf zsh-5.6.2.tar.xz && cd zsh-5.6.2 && ./configure --prefix=/usr --bindir=/bin && make && sudo make install
+		rm -rf zsh-5.6.2 zsh-5.6.2.tar.xz
+	endif
 
 stow-centos:
 	is-executable stow || sudo yum -y install stow
