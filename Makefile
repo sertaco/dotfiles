@@ -10,8 +10,8 @@ STOW_DIR := $(DOTFILES_DIR)
 
 all: $(OS)
 
-macos: sudo core-macos packages link
-centos: sudo core-centos link
+macos: sudo core-macos packages-macos link
+centos: sudo core-centos packages-centos link
 
 sudo:
 	sudo -v
@@ -28,15 +28,10 @@ link: stow-$(OS)
 	stow -t $(XDG_CONFIG_HOME) config
 
 #centos
-core-centos: zsh-centos
+core-centos:
 	sudo yum -y install wget git
-	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
-	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
-	echo $(ZSH_BIN) | sudo tee -a /etc/shells
-	chsh -s $(ZSH_BIN)
-	#wget https://dl.google.com/go/$(GO_PACKAGE)
-	#sudo tar -C /usr/local -xzf $(GO_PACKAGE)
-	#sudo rm $(GO_PACKAGE)
+
+packages-centos: zsh-centos go-centos
 
 go-centos:
 	is-executable go || { wget https://dl.google.com/go/$(GO_PACKAGE) && sudo tar -C /usr/local -xzf $(GO_PACKAGE) &&  sudo rm $(GO_PACKAGE) }
@@ -51,6 +46,10 @@ else
 	sudo tar -xJf zsh-5.6.2.tar.xz && cd zsh-5.6.2 && ./configure --prefix=/usr --bindir=/bin && make && sudo make install
 	rm -rf zsh-5.6.2 zsh-5.6.2.tar.xz
 endif
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
+	echo $(ZSH_BIN) | sudo tee -a /etc/shells
+	chsh -s $(ZSH_BIN)
+	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 
 stow-centos:
 	is-executable stow || sudo yum -y install stow
@@ -73,7 +72,7 @@ git: brew
 stow-macos: brew
 	is-executable stow || brew install stow
 
-packages: brew-packages
+packages-macos: brew-packages
 
 brew-packages: brew
 
