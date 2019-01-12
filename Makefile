@@ -34,7 +34,7 @@ core-centos:
 packages-centos: zsh-centos go-centos
 
 go-centos:
-	is-executable go || { wget https://dl.google.com/go/$(GO_PACKAGE) && sudo tar -C /usr/local -xzf $(GO_PACKAGE) &&  sudo rm $(GO_PACKAGE) }
+	is-executable go || { wget https://dl.google.com/go/$(GO_PACKAGE) && sudo tar -C /usr/local -xzf $(GO_PACKAGE) &&  sudo rm $(GO_PACKAGE); }
 
 zsh-centos:
 ifdef ZSH_V
