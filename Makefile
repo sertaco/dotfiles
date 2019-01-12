@@ -33,7 +33,7 @@ cleanup:
 #centos
 core-centos: zsh-centos
 	sudo yum -y install wget git
-	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || { echo "Could not install Oh My Zsh" >/dev/stderr exit 1 }
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 	echo $(ZSH_BIN) | sudo tee -a /etc/shells
 	chsh -s $(ZSH_BIN)
@@ -42,7 +42,7 @@ core-centos: zsh-centos
 	sudo rm $(GO_PACKAGE)
 
 zsh-centos:
-	zsh --version | grep 5.6.2 && {echo "Zsh is already installed!" >/dev/stderr exit 1}
+	zsh --version | grep 5.6.2 && { echo "Zsh is already installed!" >/dev/stderr exit 1 }
 	sudo yum -y install wget git
 	sudo yum -y install ncurses-devel
 	wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz
