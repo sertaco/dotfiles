@@ -3,7 +3,7 @@ OS := $(shell bin/is-supported bin/is-macos macos centos)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 ZSH := $(HOME)/.oh-my-zsh
 ZSH_BIN := /bin/zsh
-ZSH_V := $(zsh --version | grep 5.6.2)
+ZSH_V := $(shell zsh --version | grep 5.6.2)
 GO_PACKAGE := 'go1.11.4.linux-amd64.tar.gz'
 XDG_CONFIG_HOME := $(HOME)/.config
 STOW_DIR := $(DOTFILES_DIR)
@@ -26,13 +26,11 @@ link: stow-$(OS)
 
 	mkdir -p $(XDG_CONFIG_HOME)
 	stow -t $(XDG_CONFIG_HOME) config
-cleanup:
-	rm rc-macos rc-centos
 
 #centos
 core-centos: zsh-centos
 	sudo yum -y install wget git
-	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || { echo "Could not install Oh My Zsh" >/dev/stderr exit 1 }
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 	echo $(ZSH_BIN) | sudo tee -a /etc/shells
 	chsh -s $(ZSH_BIN)
@@ -41,13 +39,15 @@ core-centos: zsh-centos
 	sudo rm $(GO_PACKAGE)
 
 zsh-centos:
-	ifeq ($(ZSH_V),)
-		sudo yum -y install wget git
-		sudo yum -y install ncurses-devel
-		wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz
-		sudo tar -xJf zsh-5.6.2.tar.xz && cd zsh-5.6.2 && ./configure --prefix=/usr --bindir=/bin && make && sudo make install
-		rm -rf zsh-5.6.2 zsh-5.6.2.tar.xz
-	endif
+ifdef ZSH_V
+	@echo "ZSH already installed"
+else
+	sudo yum -y install wget git
+	sudo yum -y install ncurses-devel
+	wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz
+	sudo tar -xJf zsh-5.6.2.tar.xz && cd zsh-5.6.2 && ./configure --prefix=/usr --bindir=/bin && make && sudo make install
+	rm -rf zsh-5.6.2 zsh-5.6.2.tar.xz
+endif
 
 stow-centos:
 	is-executable stow || sudo yum -y install stow
