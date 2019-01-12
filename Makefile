@@ -2,7 +2,7 @@ DOTFILES_DIR := $(HOME)/.dotfiles
 OS := $(shell bin/is-supported bin/is-macos macos centos)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 ZSH := $(HOME)/.oh-my-zsh
-ZSH_BIN ;= /usr/zsh
+ZSH_BIN := /usr/zsh
 
 GO_PACKAGE := 'go1.11.4.linux-amd64.tar.gz'
 
