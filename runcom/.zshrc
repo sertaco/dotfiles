@@ -1,3 +1,4 @@
+export WORKSPACE="$HOME/workspace"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -56,7 +57,7 @@ ENABLE_CORRECTION="true"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/.config/mdp/mdprc
+source $WORKSPACE/mdp/mdprc
 
 # Source the dotfiles (order matters)
 #for DOTFILE in "$DOTFILES_DIR"/system/.{prompt,function,env,alias}; do
