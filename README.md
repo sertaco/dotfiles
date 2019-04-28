@@ -19,7 +19,7 @@ This .dotfiles is intended for both macos and centos as these two are currently 
 - mdp
 
 ## Install
-    git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/dotfiles ~/.dotfiles
+    git clone https://github.com/sertaco/dotfiles.git ~/.dotfiles
 
 Use the [Makefile](./Makefile) to install everything [listed above](#package-overview), and symlink [runcom](./runcom) and [config](./config) (using [stow](https://www.gnu.org/software/stow/)):
 
