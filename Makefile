@@ -1,20 +1,19 @@
 DOTFILES_DIR := $(HOME)/.dotfiles
-#OS := $(shell bin/is-supported bin/is-macos macos centos)
+OS := $(shell bin/set_os.sh)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 ZSH := $(HOME)/.oh-my-zsh
 ZSH_BIN := /bin/zsh
 ZSH_V := $(shell zsh --version | grep 5.6.2)
 GO_PACKAGE := 'go1.11.4.linux-amd64.tar.gz'
+GO_VERSION := '1.14'
 XDG_CONFIG_HOME := $(HOME)/.config
 STOW_DIR := $(DOTFILES_DIR)
 
-all: set-os $(OpSys)
-
-set-os:
-	. bin/set_os.sh
+all: $(OS)
 
 macos: sudo core-macos packages-macos link
 centos: sudo core-centos packages-centos link
+ubuntu: core-ubuntu link
 
 sudo:
 	sudo -v
@@ -29,6 +28,22 @@ link: stow-$(OS)
 
 	mkdir -p $(XDG_CONFIG_HOME)
 	stow -t $(XDG_CONFIG_HOME) config
+
+stow-centos:
+	is-executable stow || sudo yum -y install stow
+
+stow-ubuntu:
+	is-executable stow || sudo yum -y install stow
+
+stow-macos: brew
+	is-executable stow || brew install stow
+
+#ubuntu
+
+core-ubuntu:
+	sudo apt update && sudo apt upgrade
+	sudo apt install -y wget git zsh
+	sudo snap install --classic --channel=$(GO_VERSION)/stable go
 
 #centos
 core-centos:
@@ -54,8 +69,6 @@ endif
 	chsh -s $(ZSH_BIN)
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 
-stow-centos:
-	is-executable stow || sudo yum -y install stow
 
 #macos
 core-macos: brew zsh git
@@ -72,8 +85,6 @@ zsh: brew
 git: brew
 	brew install git git-extras
 
-stow-macos: brew
-	is-executable stow || brew install stow
 
 packages-macos: brew-packages
 
