@@ -1,5 +1,5 @@
 DOTFILES_DIR := $(HOME)/.dotfiles
-OS := $(shell bin/is-supported bin/is-macos macos centos)
+#OS := $(shell bin/is-supported bin/is-macos macos centos)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 ZSH := $(HOME)/.oh-my-zsh
 ZSH_BIN := /bin/zsh
@@ -8,7 +8,10 @@ GO_PACKAGE := 'go1.11.4.linux-amd64.tar.gz'
 XDG_CONFIG_HOME := $(HOME)/.config
 STOW_DIR := $(DOTFILES_DIR)
 
-all: $(OS)
+all: set-os $(OpSys)
+
+set-os:
+	source bin/set_os.sh
 
 macos: sudo core-macos packages-macos link
 centos: sudo core-centos packages-centos link
