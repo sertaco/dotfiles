@@ -1,5 +1,5 @@
 # .dotfiles
-.dotfiles is personal and customized for one's use cases. This one is for myself and you are free to take anything you 
+.dotfiles is personal and customized for one's own use cases. This one is for myself and you are free to take anything you 
 like at your own risk. 
 
 I would advice starting small and building your .dotfiles in time.  
