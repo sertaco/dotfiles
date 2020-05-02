@@ -11,7 +11,7 @@ STOW_DIR := $(DOTFILES_DIR)
 all: set-os $(OpSys)
 
 set-os:
-	source bin/set_os.sh
+	. bin/set_os.sh
 
 macos: sudo core-macos packages-macos link
 centos: sudo core-centos packages-centos link
