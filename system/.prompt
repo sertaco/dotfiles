@@ -1,15 +1,7 @@
-
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-#ZSH_THEME="intheloop"
-#ZSH_THEME="pmcgee-sertac"
-#ZSH_THEME="ys-modified"
-#ZSH_THEME="agnoster"
-#ZSH_THEME="spaceship-prompt"
-#ZSH_THEME="smt"
-#ZSH_THEME="random"
+ZSH_CUSTOM="$ZSH/custom"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv ssh aws  status root_indicator background_jobs history public_ip time)
@@ -48,5 +40,5 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-plugins=(git)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
