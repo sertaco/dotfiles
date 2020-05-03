@@ -42,7 +42,7 @@ stow-macos: brew
 
 core-ubuntu:
 	sudo apt update && sudo apt upgrade
-	sudo apt install -y wget git zsh
+	sudo apt install -y wget git zsh direnv
 	sudo snap install --classic --channel=$(GO_VERSION)/stable go
 
 omz-ubuntu:
@@ -54,7 +54,7 @@ omz-ubuntu:
 
 #centos
 core-centos:
-	sudo yum -y install wget git
+	sudo yum -y install wget git direnv
 
 packages-centos: zsh-centos go-centos
 
@@ -78,7 +78,7 @@ endif
 
 
 #macos
-core-macos: brew zsh git
+core-macos: brew zsh git direnv
 
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby

@@ -9,6 +9,10 @@ export EDITOR=vim
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
 
+source "$DOTFILES_DIR/system/.env"
+source "$DOTFILES_DIR/system/.prompt"
+source $WORKSPACE/guessfair/gfrc.sh
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 source $ZSH/oh-my-zsh.sh
