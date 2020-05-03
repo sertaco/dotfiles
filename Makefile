@@ -49,7 +49,7 @@ omz-ubuntu:
 	sudo sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
 	echo $(ZSH_BIN) | sudo tee -a /etc/shells
 	sudo chsh -s $(ZSH_BIN)
-	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
+	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k >/dev/null 2>&1 || echo "Powerlevel9k already installed"
 
 
 #centos
@@ -74,7 +74,7 @@ endif
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
 	echo $(ZSH_BIN) | sudo tee -a /etc/shells
 	chsh -s $(ZSH_BIN)
-	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
+	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k >/dev/null 2>&1 || echo "Powerlevel9k already installed"
 
 
 #macos
@@ -90,7 +90,7 @@ zsh: brew
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k >/dev/null 2>&1 || echo "Powerlevel9k already installed"
 
 git: brew
-	brew install git git-extras
+	brew install git git-extras >/dev/null 2>&1
 
 
 packages-macos: brew-packages
