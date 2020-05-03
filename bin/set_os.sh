@@ -4,10 +4,11 @@ function F1(){
 if ! [ -z "$OSTYPE" ] && [[ "$OSTYPE" =~ ^darwin ]]; then
   return 1
 else
-  OpSys=$(sed -n '/^ID=/{s/^ID=//;p}' /etc/os-release)
-  if OpSys='centos';then
+  OpSys=`sed -n '/^ID=/{s/^ID=//;p}' /etc/os-release`
+  echo $OpSys
+  if [[ $OpSys == "centos" ]]; then
     return 2
-  elif OpSys='ubuntu';then
+  elif [[ $OpSys == "ubuntu" ]]; then
     return 3
   else
     return 4
@@ -16,6 +17,7 @@ fi
 }
 F1
 export val=$?
+echo $val
 if [ $val -eq 1 ]; then
   echo "macos"
 elif [ $val -eq 2 ]; then
