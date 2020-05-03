@@ -39,6 +39,6 @@
 [core]
 	autocrlf = input
 	safecrlf = false
-	excludesfile = ~/config/git/ignore
+	excludesfile = ~/.config/git/ignore
 [remote "origin"]
 	push = HEAD
