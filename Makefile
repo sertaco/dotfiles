@@ -20,7 +20,7 @@ sudo:
 	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 link: stow-$(OS)
-	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE{,.bak}; fi; done
+	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE $(HOME)/$$FILE{,.bak}; fi; done
 	stow -t $(HOME) runcom
 
 	for FILE in $$(\ls -A runcom/rc-$(OS)); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE{,.bak}; fi; done
@@ -46,9 +46,9 @@ core-ubuntu:
 	sudo snap install --classic --channel=$(GO_VERSION)/stable go
 
 omz-ubuntu:
-	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
+	sudo sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
 	echo $(ZSH_BIN) | sudo tee -a /etc/shells
-	chsh -s $(ZSH_BIN)
+	sudo chsh -s $(ZSH_BIN)
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
 
 
