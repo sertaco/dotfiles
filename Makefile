@@ -23,7 +23,7 @@ link: stow-$(OS)
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE $(HOME)/$$FILE{,.bak}; fi; done
 	stow -t $(HOME) runcom
 
-	for FILE in $$(\ls -A runcom/rc-$(OS)); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE{,.bak}; fi; done
+	for FILE in $$(\ls -A runcom/rc-$(OS)); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE $(HOME)/$$FILE{,.bak}; fi; done
 	stow -t $(HOME) --dir $(DOTFILES_DIR)/runcom rc-$(OS)
 
 	mkdir -p $(XDG_CONFIG_HOME)
