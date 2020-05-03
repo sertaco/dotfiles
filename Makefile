@@ -87,7 +87,7 @@ brew:
 zsh: brew
 	brew install zsh zsh-completions
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
-	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
+	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k >/dev/null 2>&1 || echo "Powerlevel9k already installed"
 
 git: brew
 	brew install git git-extras
