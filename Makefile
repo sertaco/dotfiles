@@ -29,10 +29,10 @@ link: stow-$(OS)
 	mkdir -p $(XDG_CONFIG_HOME)
 	stow -t $(XDG_CONFIG_HOME) config
 
-stow-centos:
-	is-executable stow || sudo yum -y install stow
-
 stow-ubuntu:
+	is-executable stow || sudo apt -y install stow
+
+stow-centos:
 	is-executable stow || sudo yum -y install stow
 
 stow-macos: brew
