@@ -2,7 +2,6 @@
 ._*
 .DS_Store
 .idea
-.idea/
 .vscode
 node_modules
 bower_components
