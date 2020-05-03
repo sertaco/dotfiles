@@ -39,6 +39,6 @@
 [core]
 	autocrlf = input
 	safecrlf = false
-	excludesfile = /Users/granularity/.gitignore_global
+	excludesfile = ~/config/git/ignore
 [remote "origin"]
 	push = HEAD
