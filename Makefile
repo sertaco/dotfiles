@@ -13,7 +13,7 @@ all: $(OS)
 
 macos: sudo core-macos packages-macos link
 centos: sudo core-centos packages-centos link
-ubuntu: core-ubuntu link
+ubuntu: core-ubuntu omz-ubuntu link
 
 sudo:
 	sudo -v
@@ -44,6 +44,13 @@ core-ubuntu:
 	sudo apt update && sudo apt upgrade
 	sudo apt install -y wget git zsh
 	sudo snap install --classic --channel=$(GO_VERSION)/stable go
+
+omz-ubuntu:
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {echo "Could not install Oh My Zsh" >/dev/stderr exit 1}
+	echo $(ZSH_BIN) | sudo tee -a /etc/shells
+	chsh -s $(ZSH_BIN)
+	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k || echo "Powerlevel9k already installed"
+
 
 #centos
 core-centos:
