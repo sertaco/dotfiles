@@ -90,7 +90,8 @@ zsh: brew
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k >/dev/null 2>&1 || echo "Powerlevel9k already installed"
 
 git: brew
-	brew install git git-extras >/dev/null 2>&1
+	brew install git || brew upgrade git
+	brew install git-extras
 
 
 packages-macos: brew-packages
