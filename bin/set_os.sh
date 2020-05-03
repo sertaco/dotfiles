@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 function F1(){
-if ! [ -z "$OS" ] && [[ "$OS" =~ OSX ]]; then
+if ! [ -z "$OSTYPE" ] && [[ "$OSTYPE" =~ ^darwin ]]; then
   return 1
 else
-  OpSys=`sed -n '/^ID=/{s/^ID=//;p}' /etc/os-release`
+  OpSys=$(sed -n '/^ID=/{s/^ID=//;p}' /etc/os-release)
   if OpSys='centos';then
     return 2
   elif OpSys='ubuntu';then
@@ -19,7 +19,10 @@ export val=$?
 if [ $val -eq 1 ]; then
   echo "macos"
 elif [ $val -eq 2 ]; then
+  echo "centos"
+elif [ $val -eq 3 ]; then
   echo "ubuntu"
 else
-  echo $val
+  echo "OS not recognized"
+  exit 1
 fi
