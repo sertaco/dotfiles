@@ -51,7 +51,7 @@ omz-ubuntu:
 	sudo chsh -s $(ZSH_BIN)
 	sudo git clone https://github.com/bhilburn/powerlevel9k.git $(ZSH)/custom/themes/powerlevel9k >/dev/null 2>&1 || echo "Powerlevel9k already installed"
 	sudo git clone https://github.com/zsh-users/zsh-autosuggestions $(ZSH)/plugins/zsh-autosuggestions
-	sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(ZSH)/plugins/zsh-autosuggestions
+	sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(ZSH)/plugins/zsh-syntax-highlighting
 
 
 #centos
