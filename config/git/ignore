@@ -8,6 +8,8 @@ bower_components
 npm-debug.log
 
 .envrc
+venv
+.pytest_cache
 
 ##########################################################################################################################################
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
