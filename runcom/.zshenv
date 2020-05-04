@@ -6,3 +6,5 @@ export DOTFILES_DIR=$HOME/.dotfiles
 # Set PATH
 PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export KUANTIC_USER=LP2020
+export KUANTIC_PASS=ofea9ff-PPmX
