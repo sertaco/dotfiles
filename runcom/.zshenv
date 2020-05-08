@@ -8,3 +8,6 @@ PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export KUANTIC_USER=LP2020
 export KUANTIC_PASS=ofea9ff-PPmX
+
+export gdstr=213.14.226.129
+export gdsvpn=3.9.125.198
