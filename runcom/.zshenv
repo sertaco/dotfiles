@@ -1,6 +1,8 @@
+
 #export ZDOTDIR=$HOME/.config/zsh
 export DOTFILES_DIR=$HOME/.dotfiles
 
+export ZSH="$HOME/.oh-my-zsh"
 source "$DOTFILES_DIR/system/.env"
 source "$DOTFILES_DIR/system/.prompt"
 source "$DOTFILES_DIR/system/.alias"
