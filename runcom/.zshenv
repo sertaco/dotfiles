@@ -4,8 +4,6 @@ export DOTFILES_DIR=$HOME/.dotfiles
 source "$DOTFILES_DIR/system/.env"
 source "$DOTFILES_DIR/system/.prompt"
 source "$DOTFILES_DIR/system/.alias"
-source $WORKSPACE/guessfair/gfrc.sh
-
 
 export WORKSPACE="$HOME/workspace"
 # Path to your oh-my-zsh installation.
@@ -26,6 +24,8 @@ export gdsvpn=3.9.125.198
 
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+source $WORKSPACE/guessfair/gfrc.sh
 
 
 # Set PATH
