@@ -1,4 +1,4 @@
 
 alias rvm-prompt=$HOME/.rvm/bin/rvm-prompt
 
-alias pycharm=open -a "PyCharm.app" .
+alias pycharm="open -a PyCharm.app ."
