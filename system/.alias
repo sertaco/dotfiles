@@ -2,6 +2,6 @@
 alias rvm-prompt=$HOME/.rvm/bin/rvm-prompt
 
 alias pycharm="open -a PyCharm.app ."
-alias myip="curl https://ipinfo.io/ip"
+alias myip="curl https://ipinfo.io/ip; curl -s ipinfo.io/ | jq \".country\""
 alias lpdstart="cd ~/workspace/2019_lpd; pycharm; cd -"
 
