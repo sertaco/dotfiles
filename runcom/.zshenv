@@ -4,6 +4,7 @@ export DOTFILES_DIR=$HOME/.dotfiles
 export ZSH="$HOME/.oh-my-zsh"
 source "$DOTFILES_DIR/system/.prompt"
 source "$DOTFILES_DIR/system/.alias"
+source "$DOTFILES_DIR/system/.function"
 
 export WORKSPACE="$HOME/workspace"
 
