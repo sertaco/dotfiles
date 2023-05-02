@@ -1,3 +1,6 @@
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 
 source $ZSH/oh-my-zsh.sh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'

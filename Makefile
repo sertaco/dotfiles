@@ -11,7 +11,8 @@ STOW_DIR := $(DOTFILES_DIR)
 
 all: $(OS)
 
-macos: sudo core-macos packages-macos link
+#macos: sudo core-macos packages-macos link
+macos: link
 centos: sudo core-centos packages-centos link
 ubuntu: core-ubuntu omz-ubuntu link
 
@@ -20,14 +21,7 @@ sudo:
 	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 link: stow-$(OS)
-	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE $(HOME)/$$FILE{,.bak}; fi; done
-	stow -t $(HOME) runcom
-
-	for FILE in $$(\ls -A runcom/rc-$(OS)); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then mv -v $(HOME)/$$FILE $(HOME)/$$FILE{,.bak}; fi; done
-	stow -t $(HOME) --dir $(DOTFILES_DIR)/runcom rc-$(OS)
-
-	mkdir -p $(XDG_CONFIG_HOME)
-	stow -t $(XDG_CONFIG_HOME) config
+	sudo ./bin/move_runcoms_if_exists.sh runcom ~/.dotfiles
 
 stow-ubuntu:
 	is-executable stow || sudo apt -y install stow
@@ -80,7 +74,10 @@ endif
 
 
 #macos
-core-macos: brew zsh git direnv
+core-macos: install_brew brew zsh git direnv
+
+install_brew:
+	sh install_brew.sh
 
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
@@ -95,6 +92,8 @@ git: brew
 	brew install git || brew upgrade git
 	brew install git-extras
 
+direnv:
+	brew install direnv
 
 packages-macos: brew-packages
 
