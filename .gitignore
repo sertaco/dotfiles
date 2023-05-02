@@ -1,0 +1,20 @@
+# macOS files to ignore
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# IntelliJ project files to ignore
+.idea/
+*.iml
+out/
+target/
+
+# Logs to ignore
+*.log
+
+# OS-specific files to ignore
+Thumbs.db
+ehthumbs.db
+Desktop.ini
