@@ -12,7 +12,7 @@ STOW_DIR := $(DOTFILES_DIR)
 all: $(OS)
 
 #macos: sudo core-macos packages-macos link
-macos: link
+macos: packages-macos
 centos: sudo core-centos packages-centos link
 ubuntu: core-ubuntu omz-ubuntu link
 
@@ -96,6 +96,8 @@ direnv:
 	brew install direnv
 
 packages-macos: brew-packages
+	if [ ! -d "$(ZSH)/plugins/zsh-syntax-highlighting" ]; then git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(ZSH)/plugins/zsh-syntax-highlighting; fi
+	if [ ! -d "$(ZSH)/plugins/zsh-autosuggestions" ]; then git clone https://github.com/zsh-users/zsh-autosuggestions.git $(ZSH)/plugins/zsh-autosuggestions; fi
 
 brew-packages: brew
 

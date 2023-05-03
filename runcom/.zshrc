@@ -1,8 +1,9 @@
+source $ZSH/oh-my-zsh.sh
+
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export PATH=/opt/homebrew/bin:$HOME/bin:/usr/local/bin:$PATH
 
-
-source $ZSH/oh-my-zsh.sh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
 
 #MAC bindings
